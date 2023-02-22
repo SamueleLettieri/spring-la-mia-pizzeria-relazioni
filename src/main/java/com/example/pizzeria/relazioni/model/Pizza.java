@@ -1,11 +1,14 @@
 package com.example.pizzeria.relazioni.model;
 
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -39,6 +42,18 @@ public class Pizza {
 	@Column(nullable = false)
 	private double  price;
 	
+	@OneToMany(mappedBy = "pizza")
+	private List<OfferteSpeciali> offerteSpecialis;
+	
+	
+	public List<OfferteSpeciali> getOfferteSpecialis() {
+		return offerteSpecialis;
+	}
+
+	public void setOfferteSpecialis(List<OfferteSpeciali> offerteSpecialis) {
+		this.offerteSpecialis = offerteSpecialis;
+	}
+
 	public String getName() {
 		return name;
 	}

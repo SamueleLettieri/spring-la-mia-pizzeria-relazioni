@@ -8,13 +8,13 @@
 <body>
 
 <div class="container">
-	<h1 class="text-center mt-5">Crea la tua pizza</h1>
+	<h1 class="text-center mt-5">Crea un offerta</h1>
  
  	<div class="col-6">Ritorna alla home <a href="/"  class="btn btn-primary">Home</a></div>
  
-	<form id="pizza-form" th:object="${pizza}"  th:action="@{/pizze/create}" method="post" class="mt-3">
+	<form id="offerte-form"  th:action="@{/offerte/create}" th:object="${offerte}"  method="post" class="mt-3">
 		
-		<div th:replace="~{fragments/form :: form-pizza}"></div>
+		<div th:replace="~{fragments/form :: form-offerte}"></div>
 		
 	</form>
 </div>

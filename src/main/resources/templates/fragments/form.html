@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<div th:fragment="form">
+	<div th:fragment="form-pizza">
 		<div class="mb-3 col-5">
 			<label for="name" class="form-label">Nome</label>
 			<input type="text" id="name" th:field="*{name}" class="form-control" th:errorClass="is-invalid">
@@ -45,5 +45,35 @@
 		</div>
 		<button type="submit" class="btn btn-primary">Salva</button>
 	</div>
+	
+	
+		<div th:fragment="form-offerte">
+		<input type="hidden" th:field="*{pizza}">
+			<div class="mb-3 col-5">
+				<label for="title" class="form-label">Titolo</label>
+				<input type="text" id="title" th:field="*{title}" class="form-control" th:errorClass="is-invalid">
+				<div th:if="${#fields.hasErrors('title')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="text-danger"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mb-3 col-5">
+				<label for="dateStart" class="form-label">Data di inizio</label>
+				<input type="date" id="dateStart" th:field="*{dateStart}" class="form-control" th:errorClass="is-invalid">
+				<div th:if="${#fields.hasErrors('dateStart')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('dateStart')}" th:text="${err}" class="text-danger"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mb-3 col-5">
+				<label for="dateEnd" class="form-label">Data di inizio</label>
+				<input type="date" id="dateEnd" th:field="*{dateEnd}" class="form-control" th:errorClass="is-invalid">
+
+			</div>
+			<button type="submit" class="btn btn-primary">Salva</button>
+		</div>
+	
 </body>
 </html>
