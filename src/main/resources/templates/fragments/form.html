@@ -43,6 +43,13 @@
 				</ul>
 			</div>
 		</div>
+		<div class="mb-3 col-5">	
+			<h3>Ingredienti: </h3>
+			<div th:each="ingredienti : ${ingredientiList}" class="form-check">
+				<input type="checkbox" th:value="${ingredienti.id}" th:field="*{ingredientis}" th:id="|category_${ingredienti.id}|" class="form-check-input">
+				<label class="form-check-label" th:text="${ingredienti.name}"></label>
+			</div>
+		</div>
 		<button type="submit" class="btn btn-primary">Salva</button>
 	</div>
 	
@@ -70,7 +77,11 @@
 			<div class="mb-3 col-5">
 				<label for="dateEnd" class="form-label">Data di inizio</label>
 				<input type="date" id="dateEnd" th:field="*{dateEnd}" class="form-control" th:errorClass="is-invalid">
-
+				<div th:if="${#fields.hasErrors('dateEnd')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('dateEnd')}" th:text="${err}" class="text-danger"></li>
+					</ul>
+				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Salva</button>
 		</div>

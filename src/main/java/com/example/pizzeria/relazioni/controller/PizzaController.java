@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.pizzeria.relazioni.model.Ingredienti;
 import com.example.pizzeria.relazioni.model.Pizza;
+import com.example.pizzeria.relazioni.repository.IngredientiRepository;
 import com.example.pizzeria.relazioni.repository.PizzaRepository;
 
 import jakarta.validation.Valid;
@@ -24,6 +26,8 @@ import jakarta.validation.Valid;
 public class PizzaController {
 
 	private @Autowired PizzaRepository pizzaRepository;
+	
+	private @Autowired IngredientiRepository ingredientiRepository;
 	
 	@GetMapping
 	public String index(@RequestParam(name="keyword", required = false) String keyword, Model model) {
@@ -59,7 +63,11 @@ public class PizzaController {
 	@GetMapping("pizze/create")
 	public String create(Model model) {
 		Pizza pizza = new Pizza();
+		
+		List<Ingredienti> ingredientiList = ingredientiRepository.findAll();
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredientiList", ingredientiList);
 		return "pizze/create";
 	}
 	
@@ -79,6 +87,10 @@ public class PizzaController {
 		if(pizza.isEmpty()) {
 			return "redirect:/pizze/error";
 		}
+		
+		List<Ingredienti> ingredientiList = ingredientiRepository.findAll();
+		
+		model.addAttribute("ingredientiList", ingredientiList);
 		model.addAttribute("pizza", pizza.get());
 		return "pizze/edit";
 	}

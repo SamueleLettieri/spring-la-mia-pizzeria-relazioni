@@ -2,11 +2,13 @@ package com.example.pizzeria.relazioni.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 
@@ -17,10 +19,11 @@ public class OfferteSpeciali {
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
-	@NotNull(message = "La data non puo essere vuota")
+	@NotNull(message = "la data non puo essere nulla")
 	private LocalDate dateStart;
 	
-
+	
+	@Column(nullable = false)
 	private LocalDate dateEnd;
 	
 	@NotNull(message = "Il titolo non puo essere vuoto")
@@ -49,7 +52,7 @@ public class OfferteSpeciali {
 		return dateEnd;
 	}
 
-	public void setDateEnDate(LocalDate dateEnd) {
+	public void setDateEnd(LocalDate dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 

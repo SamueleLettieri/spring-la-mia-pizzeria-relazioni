@@ -3,11 +3,13 @@ package com.example.pizzeria.relazioni.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -42,9 +44,19 @@ public class Pizza {
 	@Column(nullable = false)
 	private double  price;
 	
-	@OneToMany(mappedBy = "pizza")
+	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE)
 	private List<OfferteSpeciali> offerteSpecialis;
 	
+	@ManyToMany
+	private List<Ingredienti> ingredientis;
+	
+	public List<Ingredienti> getIngredientis() {
+		return ingredientis;
+	}
+
+	public void setIngredientis(List<Ingredienti> ingredientis) {
+		this.ingredientis = ingredientis;
+	}
 	
 	public List<OfferteSpeciali> getOfferteSpecialis() {
 		return offerteSpecialis;

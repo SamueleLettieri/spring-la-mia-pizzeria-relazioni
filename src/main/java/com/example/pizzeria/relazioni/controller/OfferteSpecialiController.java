@@ -57,7 +57,7 @@ public class OfferteSpecialiController {
 		
 		Pizza pizza = formOfferte.getPizza();
 		offerteSpecialiRepository.save(formOfferte);
-		return "redirect:/";
+		return "redirect:/pizze/" + formOfferte.getPizza().getId();
 	}
 	
 	
@@ -80,12 +80,12 @@ public class OfferteSpecialiController {
 		return "offerte/edit";
 	}
 	@PostMapping("/edit/{id}")
-	public String update(@PathVariable("id") Integer id ,@Valid @ModelAttribute("offerta") OfferteSpeciali formOfferta, BindingResult bindingResult, Model model) {
+	public String update(@PathVariable("id") Integer id ,@Valid @ModelAttribute("offerte") OfferteSpeciali formOfferte, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			return "offerte/edit";
 		}
-		offerteSpecialiRepository.save(formOfferta);
-		return "redirect:/pizze/"+ formOfferta.getPizza().getId();
+		offerteSpecialiRepository.save(formOfferte);
+		return "redirect:/pizze/" + formOfferte.getPizza().getId();
 	}
 	
 }
